@@ -1,23 +1,20 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Dimensions, ToastAndroid } from "react-native";
-import CustomeModel from "./component/CustomeModel";
+import { StyleSheet, Pressable , Text, Dimensions, ToastAndroid, ScrollView, StatusBar } from "react-native";
 import CustomePressable from "./component/CustomePressable";
 import InputField from "./component/InputField";
 import InputFieldSecure from "./component/InputFieldSecure";
 const { height } = Dimensions.get('screen');
 
-const TaskTwo = () => {
-    // let chekHeight = height/12;
-    // console.log(chekHeight);
+const TaskTwo = ({navigation}) => {
     const [email, setEmail] = useState();
     const [emailError, setEmailError] = useState(false);
     const [password, setPassword] = useState();
     const [passwordError, setPasswordError] = useState(false);
-    // const [modalVisible, setModalVisible] = useState(false);
+
     const handle_email_change = (email) => {
         setEmail(email);
         const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (!reg.test(email)) {
+        if (!reg.test(email) && email.length !== 0) {
             setEmailError(true);
             // console.log("runing success");
         }
@@ -49,10 +46,17 @@ const TaskTwo = () => {
             setPasswordError(true);
         }
     }
+    const handlePressNavigate = () => {
+        navigation.navigate('SignUp');
+    }
     return (
-        <View>
+        <ScrollView style={styles.body}>
+            <StatusBar
+                animated={true}
+                backgroundColor="#e55039"
+            />
             {/* <CustomeModel modalVisible={modalVisible} /> */}
-            <Text style={styles.mainTitleText}>Welcome Back</Text>
+            <Text style={styles.mainTitleText}>Please Login</Text>
             <Text style={styles.msgTitleText}>Please enter required information</Text>
             <InputField
                 labelText="Please enter email*"
@@ -70,17 +74,31 @@ const TaskTwo = () => {
             />
             <CustomePressable title="Login" handle_press={handle_press} />
             <Text style={styles.forgetText}>Forgot Password?</Text>
-            <Text style={styles.messageText}>Do not have an accout? <Text style={{ color: '#6a89cc' }}>Sign Up</Text></Text>
-        </View>
+            <Text style={styles.messageText}>Do not have an accout?
+                <Pressable onPress={handlePressNavigate}>
+                    <Text style={{ color: '#6a89cc', fontSize: 16, marginTop: 10 }}> SignUp</Text>
+                </Pressable>
+            </Text>
+        </ScrollView>
     )
 }
 const styles = StyleSheet.create({
+    body: {
+        flex: 1,
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        flexDirection: 'column',
+        backgroundColor: '#f1f2f6',
+        paddingBottom: 100,
+        // marginBottom: 20,
+    },
     mainTitleText: {
         color: '#57606f',
         marginTop: height / 11,
         fontSize: 30,
         textAlign: 'center',
-        fontWeight: '500',
+        fontWeight: '600',
+        fontFamily: 'DancingScript-Bold',
     },
     msgTitleText: {
         textAlign: 'center',
@@ -97,7 +115,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     messageText: {
-        marginTop: 120,
+        marginTop: 50,
         fontSize: 16,
         textAlign: 'center',
     }

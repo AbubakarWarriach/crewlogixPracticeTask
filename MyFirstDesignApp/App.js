@@ -1,31 +1,23 @@
+// import 'react-native-gesture-handler';
 import React from 'react';
-import { ScrollView, StatusBar, StyleSheet, Text, } from 'react-native';
-import TaskTwo from './src/taskTwo/TaskTwo';
-
+import { } from 'react-native';
+// import DrawerNavigation from './src/config/DrawerNavigation';
+import TopTabNavigation from './src/config/TopTabNavigation';
+// import BottomMaterialTabNav from './src/config/BottomMaterialTabNav';
+// import CustomeTabNavigation from './src/config/CustomeTabNavigation';
+// import BottomTabNavigation from './src/config/BottomTabNavigation';
+// import StackNavigation from './src/config/StackNavigation';
 
 
 const App = () => {
 
   return (
-    <ScrollView style={styles.body}>
-      <StatusBar
-        animated={true}
-        backgroundColor="#e55039"
-      />
-      
-      <TaskTwo />
-    </ScrollView>
+    // <BottomTabNavigation />
+    // <CustomeTabNavigation />
+    // <BottomMaterialTabNav />
+    <TopTabNavigation />
+    // <DrawerNavigation />
   );
 };
-
-const styles = StyleSheet.create({
-  body: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#f1f2f6',
-    paddingBottom: 100,
-    // marginBottom: 20,
-  },
-});
 
 export default App;
